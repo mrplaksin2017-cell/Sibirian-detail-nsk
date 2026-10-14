@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#080808">
+    <title>Управление записью — Siberian Detailing</title>
+    <link rel="stylesheet" href="css/admin.css?v=20260716-2">
+</head>
+<body>
+    <main>
+        <section class="login-screen" id="loginScreen">
+            <form class="login-card" id="loginForm" novalidate>
+                <a class="brand" href="/" aria-label="Вернуться на сайт">
+                    <img src="img/logo.jpg" alt="" width="70" height="70">
+                    <span><strong>Siberian</strong> Detailing</span>
+                </a>
+                <div class="login-copy">
+                    <p class="eyebrow">Защищённый доступ</p>
+                    <h1>Панель управления</h1>
+                    <p>Введите пароль администратора, указанный при запуске сервера.</p>
+                </div>
+                <label class="field">
+                    <span>Пароль</span>
+                    <div class="password-field">
+                        <input id="adminPassword" type="password" autocomplete="current-password" required autofocus>
+                        <button id="togglePassword" type="button" aria-label="Показать пароль">Показать</button>
+                    </div>
+                </label>
+                <button class="primary-button" type="submit">Войти <span>→</span></button>
+                <p class="form-message" id="loginMessage" role="status"></p>
+                <a class="back-link" href="/">← Вернуться на сайт</a>
+            </form>
+        </section>
+
+        <section class="dashboard" id="dashboard" hidden>
+            <header class="admin-header">
+                <a class="brand" href="/">
+                    <img src="img/logo.jpg" alt="" width="52" height="52">
+                    <span><strong>Siberian</strong> Detailing</span>
+                </a>
+                <div class="header-title"><span>Управление студией</span><strong id="headerDate"></strong></div>
+                <div class="header-actions">
+                    <a href="/" target="_blank" rel="noopener">Открыть сайт ↗</a>
+                    <button id="logoutButton" type="button">Выйти</button>
+                </div>
+            </header>
+
+            <div class="admin-container">
+                <div class="page-heading">
+                    <div><p class="eyebrow">Рабочая панель</p><h1>Добро пожаловать</h1></div>
+                    <button class="icon-button" id="refreshButton" type="button" aria-label="Обновить данные">↻</button>
+                </div>
+
+                <section class="stats-grid" aria-label="Статистика">
+                    <article><span>Всего записей</span><strong id="statTotal">0</strong><small>за всё время</small></article>
+                    <article class="accent-stat"><span>Новые</span><strong id="statNew">0</strong><small>ждут обработки</small></article>
+                    <article><span>Сегодня</span><strong id="statToday">0</strong><small>автомобилей</small></article>
+                    <article><span>На неделе</span><strong id="statWeek">0</strong><small>активных записей</small></article>
+                    <article><span>Свободно сегодня</span><strong id="statAvailable">0</strong><small>интервалов</small></article>
+                </section>
+
+                <nav class="tabs" aria-label="Разделы панели">
+                    <button class="is-active" type="button" data-tab="bookings">Заявки <span id="newBadge">0</span></button>
+                    <button type="button" data-tab="schedule">Расписание</button>
+                </nav>
+
+                <section class="tab-panel is-active" id="panel-bookings">
+                    <div class="panel-heading">
+                        <div><h2>Заявки клиентов</h2><p>Обновляйте статус после звонка и выполнения работ.</p></div>
+                    </div>
+
+                    <div class="filters">
+                        <label class="search-field"><span aria-hidden="true">⌕</span><input id="bookingSearch" type="search" placeholder="Имя, телефон или автомобиль"></label>
+                        <select id="bookingStatus" aria-label="Фильтр по статусу">
+                            <option value="">Все статусы</option>
+                            <option value="new">Новые</option>
+                            <option value="confirmed">Подтверждены</option>
+                            <option value="in_progress">В работе</option>
+                            <option value="completed">Завершены</option>
+                            <option value="cancelled">Отменены</option>
+                        </select>
+                        <input id="bookingDateFilter" type="date" aria-label="Фильтр по дате">
+                        <button id="clearFilters" type="button">Сбросить</button>
+                    </div>
+
+                    <div class="bookings-list" id="bookingsList" aria-live="polite"></div>
+                </section>
+
+                <section class="tab-panel" id="panel-schedule">
+                    <div class="panel-heading schedule-heading">
+                        <div><h2>Расписание</h2><p>Отключайте интервалы, когда студия не принимает автомобили.</p></div>
+                        <label class="date-picker"><span>Дата</span><input id="scheduleDate" type="date"></label>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="schedule-meta">
+                            <div><span class="legend available"></span>Доступно</div>
+                            <div><span class="legend closed"></span>Закрыто</div>
+                            <div><span class="legend booked"></span>Уже забронировано</div>
+                        </div>
+                        <div class="slots-grid" id="adminSlots"></div>
+                        <div class="schedule-actions">
+                            <button id="defaultSlots" type="button">Вернуть стандартные</button>
+                            <button id="closeAllSlots" type="button">Закрыть весь день</button>
+                            <button class="primary-button" id="saveSlots" type="button">Сохранить расписание</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="js/admin.js?v=20260716-2" defer></script>
+</body>
+</html>
